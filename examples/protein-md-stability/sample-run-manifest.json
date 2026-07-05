@@ -13,6 +13,16 @@
       "status": "planned"
     }
   ],
+  "sample_data": {
+    "status": "candidate",
+    "source": "MDAnalysisData adk_equilibrium",
+    "upstream_url": "https://github.com/MDAnalysis/MDAnalysisData",
+    "retrieval": "from MDAnalysisData import datasets; adk = datasets.fetch_adk_equilibrium()",
+    "license": "to-be-recorded-from-dataset-metadata",
+    "citation": "to-be-recorded-from-dataset-metadata",
+    "retrieved_at": null,
+    "policy": "See docs/sample-data-policy.md and sample-data-checklist.md before release."
+  },
   "inputs": [
     {
       "name": "topology",

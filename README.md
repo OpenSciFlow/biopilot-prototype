@@ -32,8 +32,11 @@ See:
 - `docs/mvp-acceptance-criteria.md`
 - `docs/run-record-spec.md`
 - `docs/api-draft.md`
+- `docs/sample-data-policy.md`
+- `docs/demo-runbook.md`
 - `templates/report.md.j2`
 - `examples/protein-md-stability/sample-run-manifest.json`
+- `examples/protein-md-stability/sample-data-checklist.md`
 
 ## Intentionally out of scope
 
