@@ -1,0 +1,59 @@
+# {{ title }}
+
+## Task
+
+{{ task_text }}
+
+## Inputs
+
+| Input | Path | SHA-256 |
+|---|---|---|
+{% for input in inputs %}
+| {{ input.name }} | `{{ input.path }}` | `{{ input.sha256 }}` |
+{% endfor %}
+
+## Methods
+
+Workflow: `{{ workflow.name }}`  
+Tool versions:
+
+{% for tool in tools %}
+- {{ tool.name }}: {{ tool.version }}
+{% endfor %}
+
+## Results
+
+### RMSD
+
+![RMSD](../plots/rmsd.png)
+
+### RMSF
+
+![RMSF](../plots/rmsf.png)
+
+### Radius of gyration
+
+![Radius of gyration](../plots/rg.png)
+
+## Warnings
+
+{% for warning in warnings %}
+- {{ warning }}
+{% endfor %}
+
+## Limitations
+
+{% for limitation in limitations %}
+- {{ limitation }}
+{% endfor %}
+
+## Citations
+
+{% for citation in citations %}
+- {{ citation }}
+{% endfor %}
+
+## Reproducibility
+
+Run manifest: `../run_manifest.json`
+

@@ -1,0 +1,67 @@
+{
+  "run_id": "demo-md-stability-001",
+  "created_at": "2026-07-05T00:00:00Z",
+  "task_text": "Analyze this protein trajectory and report RMSD, RMSF, radius of gyration, warnings, and reproducibility metadata.",
+  "workflow": {
+    "name": "molecular-dynamics-stability-analysis",
+    "schema_version": "opensciflow.workflow/v0.1"
+  },
+  "plugins": [
+    {
+      "name": "mdanalysis-trajectory-analysis",
+      "manifest_version": "0.1.0",
+      "status": "planned"
+    }
+  ],
+  "inputs": [
+    {
+      "name": "topology",
+      "path": "inputs/topology.pdb",
+      "sha256": "to-be-computed"
+    },
+    {
+      "name": "trajectory",
+      "path": "inputs/trajectory.xtc",
+      "sha256": "to-be-computed"
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "validate_inputs",
+      "status": "planned",
+      "command": "internal validation",
+      "artifacts": []
+    },
+    {
+      "step_id": "compute_metrics",
+      "status": "planned",
+      "command": "python analyze_md_stability.py --topology {topology} --trajectory {trajectory} --out {outputs_dir}",
+      "artifacts": [
+        "metrics/rmsd.csv",
+        "metrics/rmsf.csv",
+        "metrics/rg.csv"
+      ]
+    },
+    {
+      "step_id": "generate_report",
+      "status": "planned",
+      "command": "render report.md.j2",
+      "artifacts": [
+        "report/report.md",
+        "report/report.html"
+      ]
+    }
+  ],
+  "environment": {
+    "python": "to-be-recorded",
+    "packages": [],
+    "container_digest": null
+  },
+  "artifacts": [],
+  "citations": [
+    "Cite MDAnalysis according to official guidance if used."
+  ],
+  "limitations": [
+    "Trajectory stability metrics are descriptive and do not prove biological binding, clinical relevance, or drug efficacy."
+  ]
+}
