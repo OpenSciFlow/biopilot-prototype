@@ -34,6 +34,7 @@ See:
 - `schema/opensciflow-run-record.schema.json`
 - `docs/api-draft.md`
 - `docs/sample-data-policy.md`
+- `docs/local-readiness-check.md`
 - `docs/demo-runbook.md`
 - `templates/report.md.j2`
 - `examples/protein-md-stability/sample-run-manifest.json`
@@ -43,6 +44,12 @@ Validate the sample run record:
 
 ```powershell
 python scripts\validate_run_records.py
+```
+
+Check the local Python environment before dry runs:
+
+```powershell
+python scripts\check_local_readiness.py
 ```
 
 ## Intentionally out of scope
