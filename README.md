@@ -31,6 +31,7 @@ See:
 
 - `docs/mvp-acceptance-criteria.md`
 - `docs/run-record-spec.md`
+- `docs/protocol-compliance-plan.md`
 - `schema/opensciflow-run-record.schema.json`
 - `docs/api-draft.md`
 - `docs/sample-data-policy.md`

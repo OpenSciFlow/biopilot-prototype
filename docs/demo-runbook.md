@@ -12,6 +12,7 @@ Show that BioPilot can map a natural-language request to a reviewed workflow tem
 
 - `workflow-templates` contains `molecular-dynamics-stability-analysis`.
 - `plugin-manifest` contains a reviewed `mdanalysis-trajectory-analysis` example.
+- The compliance stages in `docs/protocol-compliance-plan.md` are satisfied up to the requested demo level.
 - A public sample dataset has passed `examples/protein-md-stability/sample-data-checklist.md`.
 - Local environment has Python, MDAnalysis, NumPy, pandas, matplotlib, and Jinja2.
 - The demo machine has no requirement to upload input files.
