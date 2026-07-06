@@ -32,19 +32,23 @@ See:
 - `docs/mvp-acceptance-criteria.md`
 - `docs/run-record-spec.md`
 - `docs/protocol-compliance-plan.md`
+- `docs/minimal-runner-contract.md`
 - `schema/opensciflow-run-record.schema.json`
+- `schema/biopilot-demo-request.schema.json`
 - `docs/api-draft.md`
 - `docs/sample-data-policy.md`
 - `docs/local-readiness-check.md`
 - `docs/demo-runbook.md`
 - `templates/report.md.j2`
 - `examples/protein-md-stability/sample-run-manifest.json`
+- `examples/protein-md-stability/demo-run-request.json`
 - `examples/protein-md-stability/sample-data-checklist.md`
 - `examples/protein-md-stability/sample-data-metadata-template.md`
 
 Validate the sample run record:
 
 ```powershell
+python scripts\validate_demo_request.py
 python scripts\validate_run_records.py
 ```
 

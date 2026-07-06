@@ -1,0 +1,47 @@
+{
+  "request_id": "demo-md-stability-request-001",
+  "task_text": "Analyze this protein trajectory and prepare a reproducible MD stability report with RMSD, RMSF, radius of gyration, warnings, citations, and limitations.",
+  "workflow_template": {
+    "name": "molecular-dynamics-stability-analysis",
+    "path": "workflow-templates/protein/md-stability-analysis.yaml",
+    "schema_version": "opensciflow.workflow/v0.1"
+  },
+  "plugin_manifests": [
+    {
+      "name": "mdanalysis-trajectory-analysis",
+      "path": "plugin-manifest/examples/mdanalysis-trajectory-analysis/opensciflow.yaml",
+      "schema_version": "opensciflow.plugin/v0.1",
+      "readiness": "R2"
+    }
+  ],
+  "input_files": [
+    {
+      "name": "topology",
+      "path": "inputs/topology.pdb",
+      "format": "pdb",
+      "required": true,
+      "hash_unavailable_reason": "sample data not staged yet"
+    },
+    {
+      "name": "trajectory",
+      "path": "inputs/trajectory.xtc",
+      "format": "xtc",
+      "required": true,
+      "hash_unavailable_reason": "sample data not staged yet"
+    }
+  ],
+  "run_directory": "runs/demo-md-stability-001",
+  "execution_mode": "review-only",
+  "required_readiness": "R3",
+  "approval_required": true,
+  "safety_constraints": [
+    "do not execute until MDAnalysis dry-run evidence exists",
+    "execute reviewed command templates only",
+    "write run record for any attempted execution",
+    "include citations, licenses, and limitations in report"
+  ],
+  "notes": [
+    "This request is intentionally review-only because the current MDAnalysis manifest has not reached R3."
+  ]
+}
+

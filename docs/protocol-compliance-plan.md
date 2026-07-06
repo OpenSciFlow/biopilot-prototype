@@ -8,12 +8,19 @@ The first compliance target is:
 mdanalysis-trajectory-analysis + molecular-dynamics-stability-analysis + run_manifest.json
 ```
 
+The first structured request target is:
+
+```text
+demo-run-request.json -> planned run_manifest.json
+```
+
 ## Compliance stages
 
 | Stage | Evidence | Required before |
 |---|---|---|
 | Manifest check | Plugin manifest validates and command templates pass guardrails | Any execution |
 | Workflow check | Workflow schema, DAG, plugin list, and artifact handoff validate | Workflow selection |
+| Request check | `demo-run-request.json` validates and names the approved workflow, manifests, inputs, run directory, readiness threshold, and safety constraints | Any runner planning |
 | Environment check | Local readiness report records package availability | Dry run |
 | Dry run | Plugin dry-run command exits with `0` in a documented environment | R3 claim |
 | Smoke test | Tiny public sample produces expected files | R4 claim |
@@ -44,16 +51,17 @@ The runner must not:
 
 1. Parse user task.
 2. Select `molecular-dynamics-stability-analysis`.
-3. Validate the workflow template.
-4. Load required plugin manifests.
-5. Validate plugin manifests and command templates.
-6. Check local environment readiness.
-7. Check required input files and hashes.
-8. Render reviewed command templates.
-9. Execute steps inside a run directory.
-10. Register artifacts and logs.
-11. Validate `run_manifest.json`.
-12. Render report with citations and limitations.
+3. Validate `demo-run-request.json`.
+4. Validate the workflow template.
+5. Load required plugin manifests.
+6. Validate plugin manifests and command templates.
+7. Check local environment readiness.
+8. Check required input files and hashes.
+9. Render reviewed command templates.
+10. Execute steps inside a run directory only after approval.
+11. Register artifacts and logs.
+12. Validate `run_manifest.json`.
+13. Render report with citations and limitations.
 
 ## Current blocker
 

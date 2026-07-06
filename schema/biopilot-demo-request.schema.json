@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensciflow.org/schemas/biopilot-demo-request-v0.1.schema.json",
+  "title": "BioPilot Demo Request v0.1",
+  "type": "object",
+  "required": [
+    "request_id",
+    "task_text",
+    "workflow_template",
+    "plugin_manifests",
+    "input_files",
+    "run_directory",
+    "execution_mode",
+    "required_readiness",
+    "approval_required",
+    "safety_constraints"
+  ],
+  "properties": {
+    "request_id": { "type": "string", "minLength": 1 },
+    "task_text": { "type": "string", "minLength": 1 },
+    "workflow_template": {
+      "type": "object",
+      "required": ["name", "path", "schema_version"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "schema_version": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "plugin_manifests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "schema_version"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "schema_version": { "type": "string", "minLength": 1 },
+          "readiness": {
+            "type": "string",
+            "enum": ["R0", "R1", "R2", "R3", "R4", "R5", "R6"]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "input_files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "required"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "format": { "type": "string" },
+          "required": { "type": "boolean" },
+          "sha256": { "type": "string" },
+          "hash_unavailable_reason": { "type": "string" }
+        },
+        "anyOf": [
+          { "required": ["sha256"] },
+          { "required": ["hash_unavailable_reason"] }
+        ],
+        "additionalProperties": true
+      }
+    },
+    "run_directory": { "type": "string", "minLength": 1 },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["review-only", "dry-run", "smoke-test", "full-run"]
+    },
+    "required_readiness": {
+      "type": "string",
+      "enum": ["R0", "R1", "R2", "R3", "R4", "R5", "R6"]
+    },
+    "approval_required": { "type": "boolean" },
+    "safety_constraints": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}
+
