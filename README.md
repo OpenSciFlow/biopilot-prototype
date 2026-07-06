@@ -40,6 +40,7 @@ See:
 - `templates/report.md.j2`
 - `examples/protein-md-stability/sample-run-manifest.json`
 - `examples/protein-md-stability/sample-data-checklist.md`
+- `examples/protein-md-stability/sample-data-metadata-template.md`
 
 Validate the sample run record:
 

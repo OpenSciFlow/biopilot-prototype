@@ -47,3 +47,7 @@ https://github.com/MDAnalysis/MDAnalysisData
 ## Current decision
 
 Use this dataset only after the unchecked items above are resolved. Until then, documentation may refer to it as a preferred candidate, not as a finalized bundled dataset.
+
+Metadata should be recorded with:
+
+- `examples/protein-md-stability/sample-data-metadata-template.md`

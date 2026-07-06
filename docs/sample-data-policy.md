@@ -54,6 +54,12 @@ Every sample dataset used by the MVP must record:
 - SHA256 hashes;
 - any preprocessing steps.
 
+Use the metadata template before marking a dataset demo-ready:
+
+```text
+examples/protein-md-stability/sample-data-metadata-template.md
+```
+
 ## Claim boundary
 
 Sample-data results are workflow demonstrations only. They must not be presented as new biological findings, drug-discovery evidence, clinical evidence, or benchmark superiority claims.
