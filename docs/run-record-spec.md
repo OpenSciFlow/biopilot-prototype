@@ -2,6 +2,12 @@
 
 Each BioPilot run should produce a `run_manifest.json`.
 
+The machine-readable draft schema is:
+
+```text
+schema/opensciflow-run-record.schema.json
+```
+
 ## Required top-level fields
 
 | Field | Purpose |
@@ -31,6 +37,13 @@ Each step should record:
 - `log_path`;
 - `artifacts`.
 
+For `planned`, `running`, or `skipped` steps, runtime fields may be unavailable.
+
+For `completed` or `failed` steps, the run record must include:
+
+- `exit_code`;
+- `log_path`.
+
 ## Hashing policy
 
 - Use SHA-256 for small/medium files.
@@ -43,3 +56,10 @@ Each step should record:
 - LLM-generated shell commands are not allowed.
 - Resolved paths must stay inside approved work directories.
 
+## Validation
+
+Validate the current sample records with:
+
+```powershell
+python scripts\validate_run_records.py
+```

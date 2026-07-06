@@ -31,12 +31,19 @@ See:
 
 - `docs/mvp-acceptance-criteria.md`
 - `docs/run-record-spec.md`
+- `schema/opensciflow-run-record.schema.json`
 - `docs/api-draft.md`
 - `docs/sample-data-policy.md`
 - `docs/demo-runbook.md`
 - `templates/report.md.j2`
 - `examples/protein-md-stability/sample-run-manifest.json`
 - `examples/protein-md-stability/sample-data-checklist.md`
+
+Validate the sample run record:
+
+```powershell
+python scripts\validate_run_records.py
+```
 
 ## Intentionally out of scope
 

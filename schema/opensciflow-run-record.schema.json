@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensciflow.org/schemas/opensciflow-run-record-v0.1.schema.json",
+  "title": "OpenSciFlow Run Record v0.1",
+  "type": "object",
+  "required": [
+    "run_id",
+    "created_at",
+    "task_text",
+    "workflow",
+    "plugins",
+    "inputs",
+    "steps",
+    "environment",
+    "artifacts",
+    "citations",
+    "limitations"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "task_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workflow": {
+      "type": "object",
+      "required": ["name", "schema_version"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "schema_version": { "type": "string", "minLength": 1 },
+        "template_version": { "type": "string" },
+        "template_path": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "plugins": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "manifest_version", "status"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "manifest_version": { "type": "string", "minLength": 1 },
+          "manifest_path": { "type": "string" },
+          "readiness": {
+            "type": "string",
+            "enum": ["R0", "R1", "R2", "R3", "R4", "R5", "R6"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["planned", "ready", "used", "skipped", "failed"]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "sample_data": {
+      "type": "object",
+      "properties": {
+        "status": { "type": "string" },
+        "source": { "type": "string" },
+        "upstream_url": { "type": "string" },
+        "retrieval": { "type": "string" },
+        "license": { "type": "string" },
+        "citation": { "type": "string" },
+        "retrieved_at": { "type": ["string", "null"], "format": "date-time" },
+        "policy": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "path"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "minLength": 1 },
+          "size_bytes": { "type": "integer", "minimum": 0 },
+          "mtime": { "type": "string" },
+          "hash_unavailable_reason": { "type": "string" }
+        },
+        "anyOf": [
+          { "required": ["sha256"] },
+          { "required": ["hash_unavailable_reason"] }
+        ],
+        "additionalProperties": true
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["step_id", "status", "command", "artifacts"],
+        "properties": {
+          "step_id": { "type": "string", "minLength": 1 },
+          "status": {
+            "type": "string",
+            "enum": ["planned", "running", "completed", "failed", "skipped"]
+          },
+          "command": { "type": "string", "minLength": 1 },
+          "started_at": { "type": ["string", "null"], "format": "date-time" },
+          "completed_at": { "type": ["string", "null"], "format": "date-time" },
+          "exit_code": { "type": ["integer", "null"] },
+          "log_path": { "type": ["string", "null"] },
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                { "type": "string" },
+                {
+                  "type": "object",
+                  "required": ["path"],
+                  "properties": {
+                    "path": { "type": "string" },
+                    "sha256": { "type": "string" },
+                    "notes": { "type": "string" }
+                  },
+                  "additionalProperties": true
+                }
+              ]
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "status": { "enum": ["completed", "failed"] } },
+              "required": ["status"]
+            },
+            "then": {
+              "required": ["exit_code", "log_path"]
+            }
+          }
+        ],
+        "additionalProperties": true
+      }
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "python": { "type": "string" },
+        "packages": { "type": "array" },
+        "container_digest": { "type": ["string", "null"] },
+        "conda_env": { "type": "string" },
+        "platform": { "type": "string" },
+        "hardware": { "type": "object" }
+      },
+      "additionalProperties": true
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["path"],
+            "properties": {
+              "path": { "type": "string" },
+              "type": { "type": "string" },
+              "sha256": { "type": "string" },
+              "produced_by": { "type": "string" },
+              "notes": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "citations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}
