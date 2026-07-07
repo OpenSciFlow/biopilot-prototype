@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensciflow.org/schemas/biopilot-artifact-resolution-v0.1.schema.json",
+  "title": "BioPilot Artifact Resolution v0.1",
+  "type": "object",
+  "required": [
+    "request_id",
+    "workspace_root_policy",
+    "status",
+    "workflow_template",
+    "plugin_manifests",
+    "missing_artifacts",
+    "warnings"
+  ],
+  "properties": {
+    "request_id": { "type": "string", "minLength": 1 },
+    "workspace_root_policy": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["resolved", "partial", "missing"] },
+    "workflow_template": { "$ref": "#/$defs/resolved_artifact" },
+    "plugin_manifests": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/resolved_artifact" }
+    },
+    "missing_artifacts": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "resolved_artifact": {
+      "type": "object",
+      "required": ["kind", "declared_name", "declared_path", "declared_schema_version", "status"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["workflow_template", "plugin_manifest"] },
+        "declared_name": { "type": "string", "minLength": 1 },
+        "declared_path": { "type": "string", "minLength": 1 },
+        "declared_schema_version": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "enum": ["loaded", "missing", "invalid"] },
+        "loaded_name": { "type": ["string", "null"] },
+        "loaded_schema_version": { "type": ["string", "null"] },
+        "summary": { "type": "object" },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

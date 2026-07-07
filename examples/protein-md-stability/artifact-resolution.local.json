@@ -1,0 +1,72 @@
+{
+  "request_id": "demo-md-stability-request-001",
+  "workspace_root_policy": "Resolve request paths relative to a reviewed OpenSciFlow workspace root; default local development root is the parent directory of biopilot-prototype.",
+  "status": "resolved",
+  "workflow_template": {
+    "kind": "workflow_template",
+    "declared_name": "molecular-dynamics-stability-analysis",
+    "declared_path": "workflow-templates/protein/md-stability-analysis.yaml",
+    "declared_schema_version": "opensciflow.workflow/v0.1",
+    "status": "loaded",
+    "loaded_name": "molecular-dynamics-stability-analysis",
+    "loaded_schema_version": "opensciflow.workflow/v0.1",
+    "summary": {
+      "inputs": 2,
+      "outputs": 5,
+      "steps": 6,
+      "dag_nodes": 6,
+      "required_plugins": [
+        "mdanalysis-trajectory-analysis"
+      ],
+      "optional_plugins": [
+        "gromacs-md-stability",
+        "mdtraj-analysis"
+      ],
+      "report_template": "reports/md_stability.md.j2",
+      "records_input_hashes": true,
+      "records_tool_versions": true,
+      "records_commands": true
+    },
+    "warnings": []
+  },
+  "plugin_manifests": [
+    {
+      "kind": "plugin_manifest",
+      "declared_name": "mdanalysis-trajectory-analysis",
+      "declared_path": "plugin-manifest/examples/mdanalysis-trajectory-analysis/opensciflow.yaml",
+      "declared_schema_version": "opensciflow.plugin/v0.1",
+      "status": "loaded",
+      "loaded_name": "mdanalysis-trajectory-analysis",
+      "loaded_schema_version": "opensciflow.plugin/v0.1",
+      "summary": {
+        "domain": [
+          "molecular-dynamics",
+          "trajectory-analysis",
+          "computational-biology"
+        ],
+        "task_types": [
+          "trajectory-analysis",
+          "md-stability-analysis",
+          "protein-stability"
+        ],
+        "inputs": 3,
+        "outputs": 5,
+        "local_command_keys": [
+          "command"
+        ],
+        "slurm_supported": true,
+        "model_weights_required": false,
+        "dry_run_command": "python -c \"import MDAnalysis as mda; print(mda.__version__)\"",
+        "citation": "Cite MDAnalysis according to official guidance.",
+        "license": {
+          "software": "MDAnalysis license applies to MDAnalysis; manifest Apache-2.0",
+          "model_weights": "not-applicable",
+          "data": "user-provided"
+        }
+      },
+      "warnings": []
+    }
+  ],
+  "missing_artifacts": [],
+  "warnings": []
+}

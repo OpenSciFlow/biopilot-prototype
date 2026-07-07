@@ -37,14 +37,17 @@ See:
 - `schema/opensciflow-run-record.schema.json`
 - `schema/biopilot-demo-request.schema.json`
 - `schema/biopilot-plan-response.schema.json`
+- `schema/biopilot-artifact-resolution.schema.json`
 - `docs/api-draft.md`
 - `docs/sample-data-policy.md`
+- `docs/manifest-workflow-loading.md`
 - `docs/local-readiness-check.md`
 - `docs/demo-runbook.md`
 - `templates/report.md.j2`
 - `examples/protein-md-stability/sample-run-manifest.json`
 - `examples/protein-md-stability/demo-run-request.json`
 - `examples/protein-md-stability/plan-response.blocked.json`
+- `examples/protein-md-stability/artifact-resolution.local.json`
 - `examples/protein-md-stability/sample-data-checklist.md`
 - `examples/protein-md-stability/sample-data-metadata-template.md`
 
@@ -53,6 +56,7 @@ Validate the sample run record:
 ```powershell
 python scripts\validate_demo_request.py
 python scripts\validate_plan_response.py
+python scripts\validate_artifact_resolution.py
 python scripts\validate_run_records.py
 ```
 
@@ -60,6 +64,12 @@ Generate a review-only planning response:
 
 ```powershell
 python scripts\plan_demo_run.py
+```
+
+Resolve declared workflow and manifest artifacts without execution:
+
+```powershell
+python scripts\resolve_demo_artifacts.py
 ```
 
 Check the local Python environment before dry runs:
