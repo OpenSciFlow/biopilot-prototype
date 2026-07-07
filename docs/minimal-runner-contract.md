@@ -67,6 +67,20 @@ That is acceptable if it can:
 - validate the request;
 - validate the workflow and manifest references;
 - report missing readiness evidence;
+- emit a validated plan response;
 - produce a planned run record;
 - preserve citations, limitations, and non-claims.
 
+## Current Planning Fixture
+
+The current request is intentionally blocked for execution:
+
+```text
+examples/protein-md-stability/plan-response.blocked.json
+```
+
+Generate the same class of response with:
+
+```text
+python scripts/plan_demo_run.py
+```

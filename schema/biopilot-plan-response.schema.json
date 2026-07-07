@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensciflow.org/schemas/biopilot-plan-response-v0.1.schema.json",
+  "title": "BioPilot Plan Response v0.1",
+  "type": "object",
+  "required": [
+    "request_id",
+    "status",
+    "execution_mode",
+    "selected_workflow",
+    "selected_plugins",
+    "readiness_checks",
+    "missing_requirements",
+    "approval_required",
+    "proposed_run_directory",
+    "run_manifest_path",
+    "warnings",
+    "next_actions"
+  ],
+  "properties": {
+    "request_id": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["planned", "blocked", "refused"] },
+    "execution_mode": { "type": "string", "enum": ["review-only", "dry-run", "smoke-test", "full-run"] },
+    "selected_workflow": {
+      "type": "object",
+      "required": ["name", "path", "schema_version"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "schema_version": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "selected_plugins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "readiness", "status"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "readiness": { "type": "string" },
+          "status": { "type": "string", "enum": ["ready", "blocked", "planned"] },
+          "reason": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "readiness_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["check", "status"],
+        "properties": {
+          "check": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "enum": ["pass", "blocked", "warning"] },
+          "detail": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "missing_requirements": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "approval_required": { "type": "boolean" },
+    "proposed_run_directory": { "type": "string", "minLength": 1 },
+    "run_manifest_path": { "type": "string", "minLength": 1 },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "additionalProperties": true
+}
+

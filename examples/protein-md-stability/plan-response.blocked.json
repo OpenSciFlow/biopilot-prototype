@@ -1,0 +1,56 @@
+{
+  "request_id": "demo-md-stability-request-001",
+  "status": "blocked",
+  "execution_mode": "review-only",
+  "selected_workflow": {
+    "name": "molecular-dynamics-stability-analysis",
+    "path": "workflow-templates/protein/md-stability-analysis.yaml",
+    "schema_version": "opensciflow.workflow/v0.1"
+  },
+  "selected_plugins": [
+    {
+      "name": "mdanalysis-trajectory-analysis",
+      "readiness": "R2",
+      "status": "blocked",
+      "reason": "Required readiness is R3, but the current manifest is only R2."
+    }
+  ],
+  "readiness_checks": [
+    {
+      "check": "required_readiness",
+      "status": "blocked",
+      "detail": "mdanalysis-trajectory-analysis is R2; request requires R3."
+    },
+    {
+      "check": "sample_data_hashes",
+      "status": "blocked",
+      "detail": "Input hashes are not available because sample data has not been staged."
+    },
+    {
+      "check": "sample_data_license_citation",
+      "status": "blocked",
+      "detail": "Sample data license and citation are still to be recorded."
+    }
+  ],
+  "missing_requirements": [
+    "passing MDAnalysis dry-run evidence",
+    "sample data license",
+    "sample data citation",
+    "sample data file hashes"
+  ],
+  "approval_required": true,
+  "proposed_run_directory": "runs/demo-md-stability-001",
+  "run_manifest_path": "runs/demo-md-stability-001/run_manifest.json",
+  "warnings": [
+    "Review-only planning response; no execution was attempted.",
+    "Do not claim R3 readiness until MDAnalysis dry-run evidence passes.",
+    "Do not publish sample-data demo artifacts until license, citation, size, and hashes are recorded."
+  ],
+  "next_actions": [
+    "Create or activate an environment with MDAnalysis and MDAnalysisData.",
+    "Run the MDAnalysis dry-run and commit R3 evidence if it passes.",
+    "Stage a public sample dataset and compute hashes.",
+    "Record sample-data license and citation before execution."
+  ]
+}
+
