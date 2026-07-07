@@ -33,6 +33,7 @@ See:
 - `docs/run-record-spec.md`
 - `docs/protocol-compliance-plan.md`
 - `docs/minimal-runner-contract.md`
+- `docs/skill-run-record-projection.md`
 - `schema/opensciflow-run-record.schema.json`
 - `schema/biopilot-demo-request.schema.json`
 - `docs/api-draft.md`

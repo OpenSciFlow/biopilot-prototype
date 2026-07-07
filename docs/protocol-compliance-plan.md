@@ -25,6 +25,7 @@ demo-run-request.json -> planned run_manifest.json
 | Dry run | Plugin dry-run command exits with `0` in a documented environment | R3 claim |
 | Smoke test | Tiny public sample produces expected files | R4 claim |
 | Run record | `run_manifest.json` validates against schema | R5 claim |
+| Skill projection | BioPilot run manifest can be mapped to Skill run-record fields | Agent integration |
 | Report check | Report includes citations, limitations, and artifact list | R6-style demo claim |
 
 ## Runner boundaries
@@ -77,4 +78,5 @@ The first public demo is acceptable only when:
 - the selected sample dataset has license, citation, size, and hash metadata;
 - the workflow artifact handoff validator passes;
 - the generated run record validates;
+- the generated run record can be projected into the Skill run-record crosswalk when agent execution is claimed;
 - the report repeats the scientific limitations from the manifest and workflow template.
